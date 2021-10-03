@@ -52,6 +52,6 @@
 
 ## 6. 기술 스택
 
-![](https://img.shields.io/badge/Spring-6DB33F?logo=Spring&logoColor=white)
+![](https://img.shields.io/badge/SpringBoot-6DB33F?logo=SpringBoot&logoColor=white)
 ![](https://img.shields.io/badge/-VueJS-4FC08D?logo=vue.js&logoColor=white)
 ![](https://img.shields.io/badge/mysql-4479A1?logo=mysql&logoColor=white)
