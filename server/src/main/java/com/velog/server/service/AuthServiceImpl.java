@@ -2,7 +2,7 @@ package com.velog.server.service;
 
 import com.velog.server.dto.LoginDTO;
 import com.velog.server.dto.SignupDTO;
-import com.velog.server.repository.UserRepository;
+import com.velog.server.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +25,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     // 이메일 존재여부 체크
-    public boolean checkEmailExists(String email) {
-        return userRepository.findByEmail(email) == null;
-    }
+//    public boolean checkEmailExists(String email) {
+//        return userRepository.findByEmail(email) == null;
+//    }
 
     // 비밀번호 유효성 체크
     public void checkPasswordValidation(String password) {
@@ -46,10 +46,10 @@ public class AuthServiceImpl implements AuthService {
             String password = signupDTO.getPassword();
             String passwordConfirm = signupDTO.getPasswordConfirm();
 
-            if (!this.checkEmailValidation(email)) return "Email validation error";
-            if (!this.checkEmailExists(email)) return "Email exists error";
-            this.checkPasswordValidation(password);
-            if (!this.checkPasswordConfirm(password, passwordConfirm)) return "Not same password";
+//            if (!this.checkEmailValidation(email)) return "Email validation error";
+//            if (!this.checkEmailExists(email)) return "Email exists error";
+//            this.checkPasswordValidation(password);
+//            if (!this.checkPasswordConfirm(password, passwordConfirm)) return "Not same password";
 
             signupDTO.toEntity();
         }

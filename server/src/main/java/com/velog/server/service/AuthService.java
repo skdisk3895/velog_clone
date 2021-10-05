@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AuthService {
     public boolean checkEmailValidation(String username);
-    public boolean checkEmailExists(String username);
+//    public boolean checkEmailExists(String username);
     public void checkPasswordValidation(String password);
     public boolean checkPasswordConfirm(String password, String passwordConfirm);
     public String signup(SignupDTO signupDTO);

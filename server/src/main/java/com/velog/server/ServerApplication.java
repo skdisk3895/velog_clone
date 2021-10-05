@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaAuditing
-@EnableJpaRepositories(basePackages = {"xxx.xx.xx.repository"})
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication()
 public class ServerApplication {
 
 	public static void main(String[] args) {
