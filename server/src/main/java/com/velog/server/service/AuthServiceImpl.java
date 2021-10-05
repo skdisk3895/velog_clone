@@ -25,13 +25,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     // 이메일 존재여부 체크
-//    public boolean checkEmailExists(String email) {
-//        return userRepository.findByEmail(email) == null;
-//    }
+    public boolean checkEmailExists(String email) {
+        return userRepository.findByEmail(email) == null;
+    }
 
     // 비밀번호 유효성 체크
-    public void checkPasswordValidation(String password) {
-
+    public boolean checkPasswordValidation(String password) {
+        return password.length() >= 8;
     }
 
     // 비밀번호 랑 비밀번호 확인이 같은지 체크
@@ -46,19 +46,18 @@ public class AuthServiceImpl implements AuthService {
             String password = signupDTO.getPassword();
             String passwordConfirm = signupDTO.getPasswordConfirm();
 
-//            if (!this.checkEmailValidation(email)) return "Email validation error";
-//            if (!this.checkEmailExists(email)) return "Email exists error";
-//            this.checkPasswordValidation(password);
-//            if (!this.checkPasswordConfirm(password, passwordConfirm)) return "Not same password";
+            if (!this.checkEmailValidation(email)) return "Email validation error";
+            if (!this.checkEmailExists(email)) return "Email exists error";
+            if (!this.checkPasswordValidation(password)) return "Short password";
+            if (!this.checkPasswordConfirm(password, passwordConfirm)) return "Not same password";
 
-            signupDTO.toEntity();
+            userRepository.save(signupDTO.toEntity());
         }
         catch (Exception e) {
             System.out.println(e);
         }
 
-        userRepository.deleteAll();
-        return "Success Signup!!";
+        return "Success Signup";
     }
 
     @Transactional

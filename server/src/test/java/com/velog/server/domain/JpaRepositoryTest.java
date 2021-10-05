@@ -18,20 +18,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 class JpaRepositoryTest {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Test
-//    @Transactional
-//    @Rollback(false)
-    void save() {
-        String name = "user";
-        userRepository.save(User.builder().name(name).build());
-
-        List<User> users = userRepository.findAll();
-
-        User user = users.get(0);
-        System.out.println(user);
-        assertThat(user.getName()).isEqualTo(name);
-    }
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @Test
+////    @Transactional
+////    @Rollback(false)
+//    void save() {
+//        String name = "user";
+//        userRepository.save(User.builder().name(name).build());
+//
+//        List<User> users = userRepository.findAll();
+//
+//        User user = users.get(0);
+//        assertThat(user.getName()).isEqualTo(name);
+//    }
 }
