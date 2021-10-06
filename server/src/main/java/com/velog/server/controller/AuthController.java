@@ -1,6 +1,5 @@
 package com.velog.server.controller;
 
-import com.velog.server.domain.entity.User;
 import com.velog.server.dto.LoginDTO;
 import com.velog.server.dto.SignupDTO;
 import com.velog.server.service.AuthService;

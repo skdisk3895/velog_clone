@@ -4,21 +4,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Hashtag {
-
+public class PostHashtag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hashtag_id")
+    @Column(name = "post_hashtag_id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    @OneToMany(mappedBy = "hashtag")
-    private List<PostHashtag> posts;
+    @ManyToOne
+    @JoinColumn(name = "hashtag_id")
+    private Hashtag hashtag;
 }

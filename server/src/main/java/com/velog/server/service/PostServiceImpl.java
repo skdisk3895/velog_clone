@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PostServiceImpl {
+public class PostServiceImpl implements PostService {
 
     @Autowired
-    PostRepository postRepository;
+    private PostRepository postRepository;
 
     public List<Post> readAllPosts() {
         return postRepository.findAll();
@@ -26,7 +26,6 @@ public class PostServiceImpl {
         Post post = postRepository.findById(id).get();
         post.setTitle(postDTO.getTitle());
         post.setContent(postDTO.getContent());
-        post.setHashtag(postDTO.getTags());
     }
 
     public void deletePost(Long id) {

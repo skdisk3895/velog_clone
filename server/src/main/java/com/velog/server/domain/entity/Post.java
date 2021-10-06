@@ -1,5 +1,6 @@
 package com.velog.server.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,10 +10,12 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     private Long id;
 
     @Column(name = "title")
@@ -25,7 +28,6 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "hashtag_id")
-    private Hashtag hashtag;
+//    @OneToMany(mappedBy = "post")
+//    private List<PostHashtag> hashtags;
 }
