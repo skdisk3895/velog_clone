@@ -10,18 +10,25 @@ import java.util.List;
 
 public class PasswordEncryption {
 
-    static public List<String> encryptPassword(String password) throws NoSuchAlgorithmException {
-        List<String> hashedString = new ArrayList<String>();
-
+    static public String getSalt() throws NoSuchAlgorithmException {
         SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
-        String salt = new String(Base64.getEncoder().encode(bytes));
+        return new String(Base64.getEncoder().encode(bytes));
+    }
 
+    static public String getHex(String password, String salt) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.update(password.getBytes());
         md.update(salt.getBytes());
-        String hex = String.format("%0128x", new BigInteger(1, md.digest()));
+        return String.format("%0128x", new BigInteger(1, md.digest()));
+    }
+
+    static public List<String> encryptPassword(String password) throws NoSuchAlgorithmException {
+        List<String> hashedString = new ArrayList<String>();
+
+        String salt = PasswordEncryption.getSalt();
+        String hex = PasswordEncryption.getHex(password, salt);
 
         hashedString.add(hex);
         hashedString.add(salt);
@@ -29,11 +36,8 @@ public class PasswordEncryption {
         return hashedString;
     }
 
-    static public String encryptPasswordBySalt(String password, String salt) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.update(password.getBytes());
-        md.update(salt.getBytes());
-        String hex = String.format("%0128x", new BigInteger(1, md.digest()));
+    static public String getEncryptPasswordBySalt(String password, String salt) throws NoSuchAlgorithmException {
+        String hex = PasswordEncryption.getHex(password, salt);
         return hex;
     }
 }

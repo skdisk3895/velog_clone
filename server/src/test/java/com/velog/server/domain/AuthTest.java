@@ -25,7 +25,6 @@ class AuthTest {
 
     @Test
     @Transactional
-    @Rollback(false)
     void signup() {
         String email = "test@test.com";
         String password = "12345678";
@@ -52,7 +51,6 @@ class AuthTest {
 
     @Test
     @Transactional
-    @Rollback(false)
     void login() {
         String email = "test@test.com";
         String password = "12345678";
