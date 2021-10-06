@@ -20,12 +20,20 @@ public class PasswordEncryption {
 
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.update(password.getBytes());
-        md.update(password.getBytes());
+        md.update(salt.getBytes());
         String hex = String.format("%0128x", new BigInteger(1, md.digest()));
 
         hashedString.add(hex);
         hashedString.add(salt);
 
         return hashedString;
+    }
+
+    static public String encryptPasswordBySalt(String password, String salt) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.update(password.getBytes());
+        md.update(salt.getBytes());
+        String hex = String.format("%0128x", new BigInteger(1, md.digest()));
+        return hex;
     }
 }

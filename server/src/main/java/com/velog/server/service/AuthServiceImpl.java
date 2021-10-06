@@ -1,12 +1,15 @@
 package com.velog.server.service;
 
+import com.velog.server.domain.entity.User;
 import com.velog.server.dto.LoginDTO;
 import com.velog.server.dto.SignupDTO;
 import com.velog.server.domain.repository.UserRepository;
+import com.velog.server.service.ecryption.PasswordEncryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,8 +55,7 @@ public class AuthServiceImpl implements AuthService {
             if (!this.checkPasswordConfirm(password, passwordConfirm)) return "Not same password";
 
             userRepository.save(signupDTO.toEntity());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
 
@@ -62,6 +64,23 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional
     public String login(LoginDTO loginDTO) {
-        return "Success Login!!";
+        String email = loginDTO.getEmail();
+        String password = loginDTO.getPassword();
+
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            String salt = user.getSalt();
+            try {
+                if (!PasswordEncryption.encryptPasswordBySalt(password, salt).equals(user.getPassword()))
+                    return "Password Error";
+            } catch (NoSuchAlgorithmException e) {
+                System.out.println("I'm sorry, but MD5 is not a valid message digest algorithm");
+            }
+        } else {
+            return "Email exists error";
+        }
+
+        return "Success Login";
     }
 }
