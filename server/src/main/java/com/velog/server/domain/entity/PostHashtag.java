@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@Table(name = "post_hashtag")
 public class PostHashtag {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_hashtag_id")
     private Long id;
 
     @ManyToOne

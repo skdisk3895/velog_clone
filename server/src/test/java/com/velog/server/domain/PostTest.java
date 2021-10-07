@@ -1,16 +1,23 @@
 package com.velog.server.domain;
 
+import com.velog.server.domain.entity.Hashtag;
+import com.velog.server.domain.entity.Post;
+import com.velog.server.domain.entity.PostHashtag;
 import com.velog.server.domain.entity.User;
+import com.velog.server.domain.repository.HashtagRepositoty;
+import com.velog.server.domain.repository.PostHashtagRepository;
 import com.velog.server.domain.repository.PostRepository;
 import com.velog.server.domain.repository.UserRepository;
-import com.velog.server.dto.PostDTO;
-import com.velog.server.service.PostService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @SpringBootTest
 class PostTest {
@@ -20,31 +27,38 @@ class PostTest {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private PostService postService;
+    private HashtagRepositoty hashtagRepositoty;
+    @Autowired
+    private PostHashtagRepository postHashtagRepository;
+    @PersistenceContext
+    private EntityManager em;
 
     @Test
     @Transactional
-    @Rollback(false)
     void create() {
-        String email = "test22@test.com";
-        String title = "title123";
-        String content = "content123";
+        Hashtag hashtag = new Hashtag();
+        if (hashtagRepositoty.findByName("summer") != null) {
+            hashtag = hashtagRepositoty.findByName("summer");
+        } else {
+            hashtag.setName("summer");
+        }
+        em.persist(hashtag);
 
-//        List<String> hashtag = new ArrayList<>();
-//        hashtag.add("도롱");
-//        hashtag.add("므앙");
+        Post post = new Post();
+        User user = userRepository.findByEmail("test@test.com");
+        post.setTitle("title1236");
+        post.setContent("content1234");
+        post.setUser(user);
+        em.persist(post);
 
-        User user =  userRepository.findByEmail(email);
-        System.out.println(email);
+        PostHashtag postHashtag = new PostHashtag();
+        postHashtag.setPost(post);
+        postHashtag.setHashtag(hashtag);
 
-        System.out.println(user);
+        post.getPostHashtags().add(postHashtag);
+        hashtag.getPostHashtags().add(postHashtag);
+        em.persist(postHashtag);
 
-        PostDTO postDTO = new PostDTO();
-
-        postDTO.setTitle(title);
-        postDTO.setContent(content);
-//        postDTO.setTags(hashtag);
-        postDTO.setUser(user);
-        postService.createPost(postDTO);
+        postHashtagRepository.save(postHashtag);
     }
 }

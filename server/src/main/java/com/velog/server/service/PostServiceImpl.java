@@ -19,7 +19,7 @@ public class PostServiceImpl implements PostService {
     }
 
     public void createPost(PostDTO postDTO) {
-        postRepository.save(postDTO.toEntity());
+//        postRepository.save(postDTO.toEntity());
     }
 
     public void updatePost(PostDTO postDTO, Long id) {
