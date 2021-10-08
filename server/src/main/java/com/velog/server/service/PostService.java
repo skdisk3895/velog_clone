@@ -10,7 +10,7 @@ import java.util.List;
 public interface PostService {
     public List<Post> readAllPosts();
     public Post readPost(Long id);
-    public void createPost(PostDTO postDTO);
+    public Post createPost(PostDTO postDTO);
     public Post updatePost(PostDTO postDTO, Long id);
     public void deletePost(Long id);
 }

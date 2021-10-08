@@ -18,8 +18,4 @@ public class PostDTO {
     private String content;
     private List<String> hashtags;
     private String email;
-
-//    public Post toEntity() {
-//        return new Post(null, title, content, user);
-//    }
 }

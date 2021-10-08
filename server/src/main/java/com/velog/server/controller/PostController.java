@@ -40,7 +40,7 @@ public class PostController {
     @PostMapping("/write")
     public ResponseEntity<String> ResponseNewPost(@RequestBody PostDTO postDTO) {
         postService.createPost(postDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("success", HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")

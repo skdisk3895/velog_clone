@@ -25,7 +25,6 @@ public class Hashtag {
     @Column(name = "name")
     private String name;
 
-    //    @OneToMany(mappedBy = "hashtag")
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "hashtags")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hashtags")
     private Set<Post> posts = new HashSet<>();
 }

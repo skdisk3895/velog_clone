@@ -1,4 +1,4 @@
-package com.velog.server.domain;
+package com.velog.server.service;
 
 import com.velog.server.domain.entity.User;
 import com.velog.server.domain.repository.UserRepository;

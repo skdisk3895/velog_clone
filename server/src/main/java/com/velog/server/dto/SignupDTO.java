@@ -26,6 +26,6 @@ public class SignupDTO {
             System.out.println("I'm sorry, but MD5 is not a valid message digest algorithm");
         }
         
-        return new User(null, email, encryptedString.get(0), encryptedString.get(1));
+        return new User(null, email, encryptedString.get(0), encryptedString.get(1), null, null);
     }
 }

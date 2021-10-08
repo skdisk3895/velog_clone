@@ -35,7 +35,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Transactional
-    public void createPost(PostDTO postDTO) {
+    public Post createPost(PostDTO postDTO) {
         Post post = new Post();
         User user = userRepository.findByEmail(postDTO.getEmail());
         List<String> hashtags = postDTO.getHashtags();
@@ -56,7 +56,8 @@ public class PostServiceImpl implements PostService {
             hashtag.getPosts().add(post);
         }
 
-        postRepository.save(post);
+//        System.out.println(post.getId() + " " + post.getUser().getEmail() + " " + post.getTitle() + " " + post.getContent() + " " + post.getComments() + " " + post.getLikeUsers());
+        return postRepository.save(post);
     }
 
     @Transactional
@@ -86,11 +87,18 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(id).get();
         Set<Hashtag> hashtags = post.getHashtags();
 
+        // 연관관계 다 끊기
+        for (Hashtag hashtag: post.getHashtags()) {
+            hashtag.getPosts().remove(post);
+        }
+        post.setHashtags(null);
+
         postRepository.delete(post);
 
+        // check cascade delete
         for (Hashtag hashtag: hashtags) {
             System.out.println(hashtag.getPosts().size());
-            if (hashtag.getPosts().size() == 1) {
+            if (hashtag.getPosts().size() == 0) {
                 hashtagRepositoty.delete(hashtag);
             }
         }
