@@ -9,7 +9,8 @@ import java.util.List;
 @Service
 public interface PostService {
     public List<Post> readAllPosts();
+    public Post readPost(Long id);
     public void createPost(PostDTO postDTO);
-    public void updatePost(PostDTO postDTO, Long id);
+    public Post updatePost(PostDTO postDTO, Long id);
     public void deletePost(Long id);
 }

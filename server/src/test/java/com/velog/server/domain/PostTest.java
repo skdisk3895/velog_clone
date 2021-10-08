@@ -2,21 +2,18 @@ package com.velog.server.domain;
 
 import com.velog.server.domain.entity.Hashtag;
 import com.velog.server.domain.entity.Post;
-import com.velog.server.domain.entity.PostHashtag;
 import com.velog.server.domain.entity.User;
 import com.velog.server.domain.repository.HashtagRepositoty;
-import com.velog.server.domain.repository.PostHashtagRepository;
 import com.velog.server.domain.repository.PostRepository;
 import com.velog.server.domain.repository.UserRepository;
-import org.hibernate.exception.ConstraintViolationException;
+import com.velog.server.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -29,36 +26,52 @@ class PostTest {
     @Autowired
     private HashtagRepositoty hashtagRepositoty;
     @Autowired
-    private PostHashtagRepository postHashtagRepository;
-    @PersistenceContext
-    private EntityManager em;
+    private PostService postService;
 
     @Test
     @Transactional
+    @Rollback(false)
     void create() {
-        Hashtag hashtag = new Hashtag();
-        if (hashtagRepositoty.findByName("summer") != null) {
-            hashtag = hashtagRepositoty.findByName("summer");
-        } else {
-            hashtag.setName("summer");
-        }
-        em.persist(hashtag);
-
         Post post = new Post();
-        User user = userRepository.findByEmail("test@test.com");
-        post.setTitle("title1236");
-        post.setContent("content1234");
+
+        String title = "title1234";
+        String content = "content1234";
+        List<String> hashtags = new ArrayList<>();
+        String email = "test@test.com";
+        hashtags.add("spring22");
+        hashtags.add("summer22");
+        User user = userRepository.findByEmail(email);
+
         post.setUser(user);
-        em.persist(post);
+        post.setTitle(title);
+        post.setContent(content);
 
-        PostHashtag postHashtag = new PostHashtag();
-        postHashtag.setPost(post);
-        postHashtag.setHashtag(hashtag);
+        for (String tag : hashtags) {
+            Hashtag hashtag = new Hashtag();
+            if (hashtagRepositoty.findByName(tag) == null) {
+                hashtag.setName(tag);
+                post.getHashtags().add(hashtag);
+            } else {
+                post.getHashtags().add(hashtagRepositoty.findByName(tag));
+            }
 
-        post.getPostHashtags().add(postHashtag);
-        hashtag.getPostHashtags().add(postHashtag);
-        em.persist(postHashtag);
+            hashtag.getPosts().add(post);
+        }
 
-        postHashtagRepository.save(postHashtag);
+        postRepository.save(post);
+    }
+
+    @Test
+    @Transactional
+    void readPost() {
+//        Post post = postRepository.findById(20L).get();
+//        System.out.println(post.getId());
+//        System.out.println(post.getUser().getEmail());
+//
+//        System.out.println(post.getPostHashtags().size());
+//
+//        for (PostHashtag hashtag : post.getPostHashtags()) {
+//            System.out.println(hashtag.getHashtag().getName());
+//        }
     }
 }

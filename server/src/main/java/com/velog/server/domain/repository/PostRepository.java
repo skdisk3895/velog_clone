@@ -9,5 +9,5 @@ import java.util.Set;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-//    Set<Post> findByHashtag_id(Long hashtag_id);
+
 }

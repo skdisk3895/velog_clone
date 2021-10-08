@@ -13,10 +13,11 @@ import java.util.List;
 @Setter
 public class PostDTO {
 
+    private Long post_id;
     private String title;
     private String content;
     private List<String> hashtags;
-    private User user;
+    private String email;
 
 //    public Post toEntity() {
 //        return new Post(null, title, content, user);
