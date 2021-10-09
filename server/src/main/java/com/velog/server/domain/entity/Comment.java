@@ -33,5 +33,5 @@ public class Comment extends TimeEntity {
     @JoinTable(name = "comment_like_user",
             joinColumns = {@JoinColumn(name = "comment_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<User> likeUsers = new HashSet<>();
+    private Set<User> commentLikeUsers = new HashSet<>();
 }

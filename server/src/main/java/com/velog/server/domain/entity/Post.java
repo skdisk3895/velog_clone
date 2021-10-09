@@ -41,7 +41,7 @@ public class Post extends TimeEntity {
     @JoinTable(name = "post_like_user",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<User> likeUsers = new HashSet<>();
+    private Set<User> postLikeUsers = new HashSet<>();
 
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments = new HashSet<>();

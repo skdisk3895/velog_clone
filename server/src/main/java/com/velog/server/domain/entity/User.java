@@ -11,7 +11,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
 @Table(name = "user")
 public class User {
 
@@ -29,9 +28,9 @@ public class User {
     @Column(name = "salt")
     private String salt;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "likeUsers")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "postLikeUsers")
     private Set<Post> likePosts = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "likeUsers")
-    private Set<Post> likeComments = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "commentLikeUsers")
+    private Set<Comment> likeComments = new HashSet<>();
 }

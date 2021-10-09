@@ -31,6 +31,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> ResponseLogin(@RequestBody LoginDTO loginDTO) {
+        System.out.println(loginDTO.getEmail() + " " + loginDTO.getPassword());
         String message = authService.login(loginDTO);
 
         if (message.equals("Success Login")) {

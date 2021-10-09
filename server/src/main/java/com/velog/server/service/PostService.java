@@ -13,4 +13,5 @@ public interface PostService {
     public Post createPost(PostDTO postDTO);
     public Post updatePost(PostDTO postDTO, Long id);
     public void deletePost(Long id);
+    public void toggleLike(String email, Long postId);
 }

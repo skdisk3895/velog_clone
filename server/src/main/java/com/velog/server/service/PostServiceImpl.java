@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +32,9 @@ public class PostServiceImpl implements PostService {
 
     @Transactional
     public Post readPost(Long id) {
-        return postRepository.findById(id).get();
+        Post post = postRepository.findById(id).get();
+        System.out.println(post.getComments());
+        return post;
     }
 
     @Transactional
@@ -102,5 +105,22 @@ public class PostServiceImpl implements PostService {
                 hashtagRepositoty.delete(hashtag);
             }
         }
+    }
+
+    @Transactional
+    public void toggleLike(String email, Long postId) {
+        Post post = postRepository.findById(postId).get();
+        User user = userRepository.findByEmail(email);
+
+
+        if (post.getPostLikeUsers().contains(user)) {
+            post.getPostLikeUsers().remove(user);
+            user.getLikePosts().remove(post);
+        } else {
+            post.getPostLikeUsers().add(user);
+            user.getLikePosts().add(post);
+        }
+
+        postRepository.save(post);
     }
 }

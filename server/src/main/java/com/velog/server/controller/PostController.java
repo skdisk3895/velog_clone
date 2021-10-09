@@ -2,6 +2,7 @@ package com.velog.server.controller;
 
 import com.velog.server.domain.entity.Post;
 import com.velog.server.dto.PostDTO;
+import com.velog.server.dto.UserDTO;
 import com.velog.server.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,5 +55,11 @@ public class PostController {
         postService.deletePost(id);
         String message = "success";
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @PostMapping("/like/{postId}")
+    public ResponseEntity<String> ResponseLikePost(@RequestBody UserDTO userDTO, @PathVariable("postId") Long postId) {
+        postService.toggleLike(userDTO.getEmail(), postId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

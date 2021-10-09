@@ -1,5 +1,7 @@
 package com.velog.server.service;
 
+import com.velog.server.domain.entity.Comment;
+import com.velog.server.domain.entity.Post;
 import com.velog.server.domain.entity.User;
 import com.velog.server.dto.LoginDTO;
 import com.velog.server.dto.SignupDTO;
@@ -11,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -20,25 +25,34 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional
     public String signup(SignupDTO signupDTO) {
+        String email = signupDTO.getEmail();
+        String password = signupDTO.getPassword();
+        String passwordConfirm = signupDTO.getPasswordConfirm();
+
+        AuthValidation authValidation = new AuthValidation();
+
+        if (!authValidation.checkEmailValidation(email)) return "Email validation error";
+        if (authValidation.checkEmailExists(email, userRepository)) return "Email exists error";
+        if (!authValidation.checkPasswordValidation(password)) return "Short password";
+        if (!authValidation.checkPasswordConfirm(password, passwordConfirm)) return "Not same password";
+
+        List<String> encryptedString = new ArrayList<String>();
+
         try {
-            String email = signupDTO.getEmail();
-            String password = signupDTO.getPassword();
-            String passwordConfirm = signupDTO.getPasswordConfirm();
-
-            if (!AuthValidation.checkEmailValidation(email)) return "Email validation error";
-            if (!AuthValidation.checkEmailExists(email)) return "Email exists error";
-            if (!AuthValidation.checkPasswordValidation(password)) return "Short password";
-            if (!AuthValidation.checkPasswordConfirm(password, passwordConfirm)) return "Not same password";
-
-            userRepository.save(signupDTO.toEntity());
-        } catch (Exception e) {
-            System.out.println(e);
+            encryptedString = PasswordEncryption.encryptPassword(password);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("I'm sorry, but MD5 is not a valid message digest algorithm");
         }
+
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(encryptedString.get(0));
+        user.setSalt(encryptedString.get(1));
+        userRepository.save(user);
 
         return "Success Signup";
     }
 
-    @Transactional
     public String login(LoginDTO loginDTO) {
         String email = loginDTO.getEmail();
         String password = loginDTO.getPassword();
