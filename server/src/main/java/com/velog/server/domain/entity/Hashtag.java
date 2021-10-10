@@ -1,5 +1,6 @@
 package com.velog.server.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,6 @@ public class Hashtag {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hashtags")
+    @JsonBackReference
     private Set<Post> posts = new HashSet<>();
 }

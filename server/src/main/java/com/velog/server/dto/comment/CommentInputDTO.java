@@ -1,13 +1,12 @@
-package com.velog.server.dto;
+package com.velog.server.dto.comment;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CommentDTO {
+public class CommentInputDTO {
 
-    private Long comment_id;
     private String content;
     private String email;
 }

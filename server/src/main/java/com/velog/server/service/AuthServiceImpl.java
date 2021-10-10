@@ -1,10 +1,8 @@
 package com.velog.server.service;
 
-import com.velog.server.domain.entity.Comment;
-import com.velog.server.domain.entity.Post;
 import com.velog.server.domain.entity.User;
-import com.velog.server.dto.LoginDTO;
-import com.velog.server.dto.SignupDTO;
+import com.velog.server.dto.auth.LoginDTO;
+import com.velog.server.dto.auth.SignupDTO;
 import com.velog.server.domain.repository.UserRepository;
 import com.velog.server.service.ecryption.PasswordEncryption;
 import com.velog.server.service.validation.AuthValidation;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Service

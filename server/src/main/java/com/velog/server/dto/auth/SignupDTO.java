@@ -1,4 +1,4 @@
-package com.velog.server.dto;
+package com.velog.server.dto.auth;
 
 import com.velog.server.domain.entity.Comment;
 import com.velog.server.domain.entity.Post;
@@ -21,15 +21,4 @@ public class SignupDTO {
     private String password;
     private String passwordConfirm;
 
-//    public User toEntity() {
-//        List<String> encryptedString = new ArrayList<String>();
-//
-//        try {
-//            encryptedString = PasswordEncryption.encryptPassword(password);
-//        } catch (NoSuchAlgorithmException e) {
-//            System.out.println("I'm sorry, but MD5 is not a valid message digest algorithm");
-//        }
-//
-//        return new User(null, email, encryptedString.get(0), encryptedString.get(1), new HashSet<Post>(), new HashSet<Comment>());
-//    }
 }

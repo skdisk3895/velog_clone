@@ -6,12 +6,11 @@ import com.velog.server.domain.entity.User;
 import com.velog.server.domain.repository.HashtagRepositoty;
 import com.velog.server.domain.repository.PostRepository;
 import com.velog.server.domain.repository.UserRepository;
-import com.velog.server.dto.PostDTO;
+import com.velog.server.dto.post.PostInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,18 +32,17 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public Post readPost(Long id) {
         Post post = postRepository.findById(id).get();
-        System.out.println(post.getComments());
         return post;
     }
 
     @Transactional
-    public Post createPost(PostDTO postDTO) {
+    public Post createPost(PostInputDTO requestData) {
         Post post = new Post();
-        User user = userRepository.findByEmail(postDTO.getEmail());
-        List<String> hashtags = postDTO.getHashtags();
+        User user = userRepository.findByEmail(requestData.getEmail());
+        List<String> hashtags = requestData.getHashtags();
 
-        post.setTitle(postDTO.getTitle());
-        post.setContent(postDTO.getContent());
+        post.setTitle(requestData.getTitle());
+        post.setContent(requestData.getContent());
         post.setUser(user);
 
         for (String tag : hashtags) {
@@ -59,18 +57,17 @@ public class PostServiceImpl implements PostService {
             hashtag.getPosts().add(post);
         }
 
-//        System.out.println(post.getId() + " " + post.getUser().getEmail() + " " + post.getTitle() + " " + post.getContent() + " " + post.getComments() + " " + post.getLikeUsers());
         return postRepository.save(post);
     }
 
     @Transactional
-    public Post updatePost(PostDTO postDTO, Long id) {
+    public Post updatePost(PostInputDTO requestData, Long id) {
         Post post = postRepository.findById(id).get();
-        post.setTitle(postDTO.getTitle());
-        post.setContent(postDTO.getContent());
+        post.setTitle(requestData.getTitle());
+        post.setContent(requestData.getContent());
         post.getHashtags().clear();
 
-        for (String tag : postDTO.getHashtags()) {
+        for (String tag : requestData.getHashtags()) {
             Hashtag hashtag = new Hashtag();
             if (hashtagRepositoty.findByName(tag) == null) {
                 hashtag.setName(tag);

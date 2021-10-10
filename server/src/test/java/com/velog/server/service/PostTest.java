@@ -7,13 +7,10 @@ import com.velog.server.domain.entity.User;
 import com.velog.server.domain.repository.HashtagRepositoty;
 import com.velog.server.domain.repository.PostRepository;
 import com.velog.server.domain.repository.UserRepository;
-import com.velog.server.dto.PostDTO;
-import com.velog.server.service.PostService;
+import com.velog.server.dto.post.PostDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;

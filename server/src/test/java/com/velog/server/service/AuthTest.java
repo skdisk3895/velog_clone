@@ -2,13 +2,11 @@ package com.velog.server.service;
 
 import com.velog.server.domain.entity.User;
 import com.velog.server.domain.repository.UserRepository;
-import com.velog.server.dto.LoginDTO;
-import com.velog.server.dto.SignupDTO;
-import com.velog.server.service.AuthService;
+import com.velog.server.dto.auth.LoginDTO;
+import com.velog.server.dto.auth.SignupDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 import java.util.List;

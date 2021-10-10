@@ -1,5 +1,6 @@
 package com.velog.server.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;

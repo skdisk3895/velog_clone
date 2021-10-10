@@ -1,11 +1,11 @@
-package com.velog.server.dto;
+package com.velog.server.dto.auth;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDTO {
-
+public class LoginDTO {
     private String email;
+    private String password;
 }

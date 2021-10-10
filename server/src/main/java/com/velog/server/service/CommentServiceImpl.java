@@ -5,7 +5,7 @@ import com.velog.server.domain.entity.User;
 import com.velog.server.domain.repository.CommentRepository;
 import com.velog.server.domain.repository.PostRepository;
 import com.velog.server.domain.repository.UserRepository;
-import com.velog.server.dto.CommentDTO;
+import com.velog.server.dto.comment.CommentInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,20 +22,20 @@ public class CommentServiceImpl implements CommentService {
     private UserRepository userRepository;
 
     @Transactional
-    public Comment createComment(CommentDTO commentDTO, Long postId) {
-        System.out.println(commentDTO.getContent());
+    public Comment createComment(CommentInputDTO commentInputDTO, Long postId) {
+        System.out.println(commentInputDTO.getContent());
         Comment comment = new Comment();
-        comment.setContent(commentDTO.getContent());
+        comment.setContent(commentInputDTO.getContent());
         comment.setPost(postRepository.findById(postId).get());
-        comment.setUser(userRepository.findByEmail(commentDTO.getEmail()));
+        comment.setUser(userRepository.findByEmail(commentInputDTO.getEmail()));
 
         return commentRepository.save(comment);
     }
 
     @Transactional
-    public Comment updateComment(CommentDTO commentDTO, Long commentId) {
+    public Comment updateComment(CommentInputDTO commentInputDTO, Long commentId) {
         Comment comment = commentRepository.findById(commentId).get();
-        comment.setContent(commentDTO.getContent());
+        comment.setContent(commentInputDTO.getContent());
         return commentRepository.save(comment);
     }
 

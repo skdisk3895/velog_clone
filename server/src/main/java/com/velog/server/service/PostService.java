@@ -1,7 +1,7 @@
 package com.velog.server.service;
 
 import com.velog.server.domain.entity.Post;
-import com.velog.server.dto.PostDTO;
+import com.velog.server.dto.post.PostInputDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
 public interface PostService {
     public List<Post> readAllPosts();
     public Post readPost(Long id);
-    public Post createPost(PostDTO postDTO);
-    public Post updatePost(PostDTO postDTO, Long id);
+    public Post createPost(PostInputDTO requestData);
+    public Post updatePost(PostInputDTO requestData, Long id);
     public void deletePost(Long id);
     public void toggleLike(String email, Long postId);
 }
