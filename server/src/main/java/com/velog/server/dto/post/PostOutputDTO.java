@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class PostOutputDTO {
     private String title;
     private String content;
     private String email;
-    private List<Hashtag> hashtagsList;
+    private List<Hashtag> hashtags;
     private List<Comment> comments;
     private List<User> likeUsers;
 
@@ -32,16 +33,16 @@ public class PostOutputDTO {
         for (Hashtag hashtag: post.getHashtags()) {
             hashtags.add(hashtag);
         }
-        postOutputDTO.setHashtagsList(hashtags);
+        postOutputDTO.setHashtags(hashtags);
 
         List<Comment> comments = new ArrayList<>();
-        for (Comment comment: comments) {
+        for (Comment comment: post.getComments()) {
             comments.add(comment);
         }
         postOutputDTO.setComments(comments);
 
         List<User> likeUsers = new ArrayList<>();
-        for (User user : likeUsers) {
+        for (User user : post.getPostLikeUsers()) {
             likeUsers.add(user);
         }
         postOutputDTO.setLikeUsers(likeUsers);

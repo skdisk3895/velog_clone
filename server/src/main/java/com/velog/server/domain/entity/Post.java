@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,10 +43,12 @@ public class Post extends TimeEntity {
     @JoinTable(name = "post_like_user",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    @JsonManagedReference
     private Set<User> postLikeUsers = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.REMOVE, mappedBy = "post")
-    private Set<Comment> comments = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade =  CascadeType.REMOVE, mappedBy = "post")
+    @JsonManagedReference
+    private List<Comment> comments = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
