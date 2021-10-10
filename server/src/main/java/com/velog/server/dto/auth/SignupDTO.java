@@ -16,7 +16,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class SignupDTO {
-    private Long id;
     private String email;
     private String password;
     private String passwordConfirm;

@@ -50,24 +50,24 @@ public class AuthServiceImpl implements AuthService {
         return "Success Signup";
     }
 
-    public String login(LoginDTO loginDTO) {
+    public User login(LoginDTO loginDTO) {
         String email = loginDTO.getEmail();
         String password = loginDTO.getPassword();
 
         User user = userRepository.findByEmail(email);
 
-        if (user != null) {
-            String salt = user.getSalt();
-            try {
-                if (!PasswordEncryption.getEncryptPasswordBySalt(password, salt).equals(user.getPassword()))
-                    return "Password Error";
-            } catch (NoSuchAlgorithmException e) {
-                System.out.println("I'm sorry, but MD5 is not a valid message digest algorithm");
-            }
-        } else {
-            return "Email exists error";
-        }
+//        if (user != null) {
+//            String salt = user.getSalt();
+//            try {
+//                if (!PasswordEncryption.getEncryptPasswordBySalt(password, salt).equals(user.getPassword()))
+//                    return "Password Error";
+//            } catch (NoSuchAlgorithmException e) {
+//                System.out.println("I'm sorry, but MD5 is not a valid message digest algorithm");
+//            }
+//        } else {
+//            return "Email exists error";
+//        }
 
-        return "Success Login";
+        return user;
     }
 }
