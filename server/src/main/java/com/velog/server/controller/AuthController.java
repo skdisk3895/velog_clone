@@ -37,7 +37,6 @@ public class AuthController {
     @ApiOperation(value = "회원가입", notes = "회원가입을 요청한다.")
     @PostMapping("/signup")
     public CommonResult ResponseSignup(@ApiParam(value = "회원가입 폼 객체", required = true) @RequestBody SignupDTO requestData) {
-        System.out.println(Collections.singletonList("APPLE"));
         userRepository.save(User.builder()
                 .email(requestData.getEmail())
                 .password(requestData.getPassword())
