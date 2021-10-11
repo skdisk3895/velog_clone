@@ -113,7 +113,6 @@ export default {};
   width: 100%;
   position: relative;
   padding-top: 52%;
-  cursor: pointer;
 }
 
 .thumbnail img {
@@ -122,12 +121,20 @@ export default {};
   left: 0;
   width: 100%;
   height: 100%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .post__main,
 .post__info,
 .post__writer__like {
   padding: 1rem;
+}
+
+.thumbnail,
+.post__main,
+.post__writer__like {
+  cursor: pointer;
 }
 
 .post__main h4,

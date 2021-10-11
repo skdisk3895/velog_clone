@@ -2,18 +2,24 @@
   <div class="home">
     <TopNav />
     <Main />
+    <AuthModal />
+    <Shadow />
   </div>
 </template>
 
 <script>
 import TopNav from "@/components/TopNav.vue";
 import Main from "@/components/Main.vue";
+import AuthModal from "@/components/AuthModal.vue";
+import Shadow from "@/components/Shadow.vue";
 
 export default {
   name: "Home",
   components: {
     TopNav,
     Main,
+    AuthModal,
+    Shadow,
   },
 };
 </script>
