@@ -1,14 +1,17 @@
 <template>
   <nav id="mainNavTop">
     <div class="sort">
-      <div class="favorite">
+      <div class="favorite clicked">
         <div class="favorite__icon">
           <i class="fas fa-thumbs-up"></i>
         </div>
         <p>트랜딩</p>
       </div>
-      <div>
-        <p class="new">최신</p>
+      <div class="new">
+        <div class="new__icon">
+          <i class="far fa-clock"></i>
+        </div>
+        <p>최신</p>
       </div>
     </div>
   </nav>
@@ -25,6 +28,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 
 .sort {
@@ -33,22 +37,26 @@ export default {
 }
 
 .sort p {
-  padding: 10px;
   font-size: 1.2em;
+}
+
+.favorite, .new {
+  width: 7rem;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   cursor: pointer;
 }
 
-.sort p.clicked {
+.favorite.clicked, .new.clicked {
+  color: black;
   border-bottom: 2px solid black;
 }
 
-.favorite {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.favorite__icon {
-  width: 7px;
+.favorite__icon, .new__icon {
+  margin-right: 10px;
+  font-size: 1.2em;
 }
 </style>
