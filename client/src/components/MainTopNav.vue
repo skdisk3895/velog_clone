@@ -18,9 +18,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
@@ -40,7 +38,8 @@ export default {
   font-size: 1.2em;
 }
 
-.favorite, .new {
+.favorite,
+.new {
   width: 7rem;
   height: 45px;
   display: flex;
@@ -50,12 +49,14 @@ export default {
   cursor: pointer;
 }
 
-.favorite.clicked, .new.clicked {
+.favorite.clicked,
+.new.clicked {
   color: black;
   border-bottom: 2px solid black;
 }
 
-.favorite__icon, .new__icon {
+.favorite__icon,
+.new__icon {
   margin-right: 10px;
   font-size: 1.2em;
 }

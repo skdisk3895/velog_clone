@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
 };
@@ -17,6 +16,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: rgb(248, 249, 250);
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 #app {

@@ -11,9 +11,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
@@ -29,8 +27,8 @@ export default {
   width: 71px;
   height: 24px;
   font-family: "Fira Mono", monospace;
-  font-size: 1.6rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: bold;
   color: rgb(52, 58, 64);
   text-decoration: none;
 }

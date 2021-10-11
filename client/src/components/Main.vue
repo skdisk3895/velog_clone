@@ -10,13 +10,12 @@ import MainTopNav from "@/components/MainTopNav.vue";
 import PostList from "@/components/PostList.vue";
 
 export default {
-    components: {
-        MainTopNav,
-        PostList,
-    }
-}
+  components: {
+    MainTopNav,
+    PostList,
+  },
+};
 </script>
 
 <style>
-
 </style>
